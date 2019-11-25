@@ -9,7 +9,10 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 app.use(express.static(__dirname + '/uploads'));
 app.use(bodyParser.json());
-app.use(cors(
+app.use(cors({
+  credentials:true,
+  origin:'/api/login'
+} 
 ));
 var file = __dirname+'/data/items.json';
 var storage = multer.diskStorage({
