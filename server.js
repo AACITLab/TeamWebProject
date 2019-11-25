@@ -40,7 +40,7 @@ app.post("/add",function(req,res){
     res.json(data);
 });
 app.post('/update',function(req,res){
-	var data_list=jsonfile.readFileSync(file);//get dữ liệu
+	var data_list=jsonfile.readFileSync(file);
 	var sanpham = req.body;
 	var f=0;
 	var xacnhan=0;
@@ -51,7 +51,7 @@ app.post('/update',function(req,res){
               }
               f++;
     }
-   // return res.json(data_list['sanphams'][f]);
+  
     if(xacnhan>0){
     	data_list['sanphams'][f]={
               "masp":sanpham.masp,
@@ -59,7 +59,7 @@ app.post('/update',function(req,res){
               "price":sanpham.price,
               "image":"uploads/"+sanpham.image.replace("uploads/","")
             };
-    	//console.log(data_list['sanphams']);
+    
     	
 	    fs.writeFile('data/items.json', JSON.stringify(data_list), 'utf-8', function(err) {
 	      if (err) throw err
@@ -73,7 +73,7 @@ app.post('/update',function(req,res){
 
 });
 app.get('/delete/:masp',function(req,res){
-  var data_list=jsonfile.readFileSync(file);//get dữ liệu
+  var data_list=jsonfile.readFileSync(file);
   var masp = req.params.masp;
   var f=0;
   var xacnhan = 0;
@@ -84,7 +84,7 @@ app.get('/delete/:masp',function(req,res){
       }
       f++;
   }
-  //neu xac nhan bang 1 la ton tai co masp
+ 
   if(xacnhan>0){
    
    
@@ -109,6 +109,6 @@ app.post('/uploads', upload.single('image'), (req, res) => {
    console.log(req.body);
     return res.json(req.body);
 });
-http.listen(process.env.PORT || 8888, function(){
-  console.log('listening on *:8888');
+http.listen(process.env.PORT || 8080, function(){
+  console.log('listening on *:8080');
 });
