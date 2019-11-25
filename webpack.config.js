@@ -36,6 +36,6 @@ module.exports = {
   ]
 },
 devServer: {
-       port: ''
+       port: 3000
    }
 }

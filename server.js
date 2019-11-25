@@ -9,11 +9,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 app.use(express.static(__dirname + '/uploads'));
 app.use(bodyParser.json());
-app.use(cors({
-  credentials:true,
-  origin:'http://localhost:8080'
-}
-
+app.use(cors(
 ));
 var file = __dirname+'/data/items.json';
 var storage = multer.diskStorage({
@@ -114,6 +110,6 @@ app.post('/uploads', upload.single('image'), (req, res) => {
    console.log(req.body);
     return res.json(req.body);
 });
-http.listen(process.env.PORT || 8888, function(){
+http.listen(process.env.PORT || '8888', function(){
   console.log('listening on *:8888');
 });
