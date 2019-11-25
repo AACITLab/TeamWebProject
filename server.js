@@ -109,6 +109,6 @@ app.post('/uploads', upload.single('image'), (req, res) => {
    console.log(req.body);
     return res.json(req.body);
 });
-http.listen(process.env.PORT || 8080, function(){
-  console.log('listening on *:8080');
+http.listen(process.env.PORT || 8888, function(){
+  console.log('listening on *:8888');
 });
