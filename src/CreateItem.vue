@@ -55,17 +55,8 @@
 										</tr>
 								</tbody>
 							</table>
-					
-					
 				</div>
 			</div>
-		
-		<div class="row">
-			<div class="col-md-6">
-				<!-- <router-link :to="{name:'UploadImage'}">Upload Image</router-link> -->
-			</div>
-		</div>
-
 	</div>
 
 </template>
@@ -93,7 +84,7 @@
 		},
 		methods:{
 			addItem(){
-				this.axios.post("http://localhost:8888/add",this.item).then((response) => {
+				this.axios.post("/add",this.item).then((response) => {
 					   console.log(response);
 					   this.dulieu[0].push({
 						   "masp":this.item.masp,
@@ -106,16 +97,16 @@
 			},
 			editItem(index){
 				//console.log(this.dulieu[0][index]);
-				var data_edit = this.dulieu[0][index];//lấy dữ liệu cần edit
-				this.item=data_edit;//đưa dữ liệu vào item
-				this.imageSrc = this.item.image;//gắn image lại
+				const data_edit = this.dulieu[0][index];
+				this.item=data_edit;
+				this.imageSrc = this.item.image;
 			},
 			updateItem(){
 				
-				this.axios.post("http://localhost:8888/update",this.item).then((response) => {
-					var image = this.item.image.replace('uploads/', '');
+				this.axios.post("/update",this.item).then((response) => {
+					const image = this.item.image.replace('uploads/', '');
 					console.log(image);
-					var index = response.data['vitri'];
+					const index = response.data['vitri'];
 					this.dulieu[0][index].masp=this.item.masp;
 					this.dulieu[0][index].name=this.item.name;
 					this.dulieu[0][index].price=this.item.price;
@@ -129,34 +120,34 @@
 			},
 			deleteItem(index){
 				
-				var masp = this.dulieu[0][index].masp;
-				//console.log(masp);
-				this.axios.get("http://localhost:8888/delete/"+masp).then((response)=>{
+				const masp = this.dulieu[0][index].masp;
+				console.log(masp);
+				this.axios.get("/delete/"+masp).then((response)=>{
 					console.log(response.data);
 					this.dulieu[0].splice(index, 1);
 				});
 			},
 			getItems(){
 				
-				this.axios.get("http://localhost:8888/getItems").then((response) => {
+				this.axios.get("/getItems").then((response) => {
 					this.dulieu.push(response.data); 
 					console.log(this.dulieu);
              	});
 			},
 			uploadImage: function(e) {
-			      var files = e.target.files;
+			      const files = e.target.files;
 			      this.item.image = files[0].name;
 			    
 			      if(!files[0]) {
 			        return;
 			      }
-			     var data = new FormData();
+			     const data = new FormData();
 				  data.append('image', files[0]);
-				      var reader = new FileReader();
+				      const reader = new FileReader();
 				      reader.onload = (e) => {
 				        this.imageSrc = e.target.result;
 				      };
-				      this.axios.post('http://localhost:8888/uploads', data, {headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
+				      this.axios.post('/uploads', data, {headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
 						reader.readAsDataURL(files[0]);
 				      }).catch(function (error) {
 				        console.log(error) // catch your error
