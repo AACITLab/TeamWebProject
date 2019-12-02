@@ -1,7 +1,7 @@
 <template>
     <div>
         <header class="navbar">
-        <span class="navbar-text"> Image moderation with VueJs, NodeJs and
+        <span class="navbar-text">  VueJs, NodeJs 
           <a href="https://sightengine.com/">Sightengine</a>
         </span>
         </header>
@@ -17,7 +17,7 @@
 export default {
   data () {
     return {
-      imageSrc: 'http://hoanguyenit.com/public/upload/images/create-template-vuejs-laravel.jpg',
+      imageSrc: '',
     }
   },
   methods: {
@@ -32,7 +32,7 @@ export default {
       reader.onload = (e) => {
         this.imageSrc = e.target.result;
       };
-      this.axios.post('http://localhost:8888/uploads', data, {headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
+      this.axios.post('/uploads', data, {headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
         reader.readAsDataURL(files[0]);
       }).catch(function (error) {
         console.log(error) // catch your error
