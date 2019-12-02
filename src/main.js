@@ -4,7 +4,9 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 Vue.use(VueAxios,axios);
 
-//import template vuejs
+Vue.config.productionTip = false
+axios.defaults.withCredentials = true
+
 import App from './App.vue';
 import CreateItem from './CreateItem.vue';
 import UploadImage from './UploadImage.vue';
